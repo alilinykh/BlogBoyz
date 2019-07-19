@@ -1,3 +1,4 @@
+
 ---
 spring:
   profiles: local
@@ -9,7 +10,7 @@ spring:
       ddl-auto: none
   datasource:
     platform:
-    url: jdbc:mysql://localhost:3307/blogBoys
+    url: jdbc:mysql://localhost:3306/blogBoys
     username: root
     password: password
     driverClassName:
@@ -30,4 +31,3 @@ spring:
     username: bcc9271327d80f
     password: fb19147f
     driverClassName:
-
