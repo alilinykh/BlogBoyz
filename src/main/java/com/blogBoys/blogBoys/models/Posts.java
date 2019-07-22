@@ -1,11 +1,6 @@
 package com.blogBoys.blogBoys.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.criteria.CriteriaBuilder;
-import java.sql.Date;
+import javax.persistence.*;
 
 @Entity
 public class Posts {
@@ -17,18 +12,22 @@ public class Posts {
     String image;
     String date;
     String tag;
-    Integer user_id;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+
+    private Users users;
 
     public Posts() {
     }
 
-    public Posts(String title, String content, String image, String date, String tag, Integer user_id) {
+    public Posts(String title, String content, String image, String date, String tag, Users users) {
         this.title = title;
         this.content = content;
         this.image = image;
         this.date = date;
         this.tag = tag;
-        this.user_id = user_id;
+        this.users = users;
     }
 
     public Integer getPost_id() {
@@ -51,12 +50,12 @@ public class Posts {
         return content;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Users getUsers() {
+        return users;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUsers(Users users) {
+        this.users = users;
     }
 
     public void setContent(String content) {

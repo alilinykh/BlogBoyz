@@ -12,7 +12,7 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    public Users create(Users user) {return userRepo.save(user);}
+    public Users create(Users users) {return userRepo.save(users);}
 
     public void deleteUser(int id) {userRepo.deleteById(id);}
 

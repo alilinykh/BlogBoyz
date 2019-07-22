@@ -1,9 +1,7 @@
 package com.blogBoys.blogBoys.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Users {
@@ -13,6 +11,14 @@ public class Users {
     Integer user_id;
     String name;
     String password;
+
+    @OneToMany(cascade = CascadeType.ALL)
+
+    @JoinTable(name = "posts_users",
+                joinColumns = @JoinColumn(name = "post_id"),
+                inverseJoinColumns = @JoinColumn(name = "user_id")
+                )
+    private Set<Posts> posts;
 
     public Users() {
     }
@@ -44,5 +50,9 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Posts> getPosts() {
+        return this.posts;
     }
 }
