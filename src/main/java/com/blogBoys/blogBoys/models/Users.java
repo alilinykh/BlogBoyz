@@ -1,7 +1,11 @@
 package com.blogBoys.blogBoys.models;
 
+import org.springframework.data.repository.cdi.Eager;
+import org.springframework.data.util.Lazy;
+
 import javax.persistence.*;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Users {
@@ -12,13 +16,9 @@ public class Users {
     String name;
     String password;
 
-    @OneToMany(cascade = CascadeType.ALL)
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Posts> posts = new ArrayList<>();
 
-    @JoinTable(name = "posts_users",
-                joinColumns = @JoinColumn(name = "post_id"),
-                inverseJoinColumns = @JoinColumn(name = "user_id")
-                )
-    private Set<Posts> posts;
 
     public Users() {
     }
@@ -52,7 +52,12 @@ public class Users {
         this.password = password;
     }
 
-    public Set<Posts> getPosts() {
-        return this.posts;
-    }
+//    public List<Posts> getPosts() {
+//        return posts;
+//    }
+//
+//    public void setPosts(List<Posts> posts) {
+//        this.posts = posts;
+//    }
+
 }
