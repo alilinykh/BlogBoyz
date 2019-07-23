@@ -42,7 +42,7 @@ public class PostServiceTest {
 
     @Test
     public void index() {
-        when(postRepo.findAll()).thenReturn(stubData());
+        when(postRepo.getAllByContentNotNull()).thenReturn(stubData());
         postService.index();
 
         verify(postRepo,times(1)).findAll();

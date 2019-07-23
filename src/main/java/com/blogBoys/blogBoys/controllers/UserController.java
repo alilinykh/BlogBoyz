@@ -32,4 +32,5 @@ public class UserController {
     public Users getUserByName(@PathVariable String name) {
         return userService.getUserByNP(name);
     }
+
 }

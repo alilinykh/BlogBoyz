@@ -21,7 +21,6 @@ public class UserService {
     public Users getUserById(int id) {return userRepo.findById(id).get();}
 
     public Users getUserByNP(String name) {
-        System.out.println(userRepo.findByName(name));
         return userRepo.findByName(name);
     }
 }
