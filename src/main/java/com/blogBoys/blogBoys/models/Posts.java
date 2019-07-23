@@ -19,13 +19,8 @@ public class Posts {
     Integer user_id;
     String author;
 
-//    @ManyToOne//(cascade = CascadeType.ALL)
-//    private Users users;
-
     public Posts() {
     }
-
-
 
     public Posts(String title, String content, String image, String date, String tag, Integer user_id , String author) {
         this.title = title;
