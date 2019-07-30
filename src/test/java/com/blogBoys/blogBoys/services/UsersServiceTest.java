@@ -1,5 +1,6 @@
 package com.blogBoys.blogBoys.services;
 
+import com.blogBoys.blogBoys.controllers.UserController;
 import com.blogBoys.blogBoys.models.Users;
 import com.blogBoys.blogBoys.repos.UserRepo;
 import org.junit.Test;
@@ -16,7 +17,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 
-public class UsersServiceTest {
+public class UserServiceTest {
 
     @Mock
     private UserRepo userRepo;
@@ -26,12 +27,12 @@ public class UsersServiceTest {
 
     @Test
     public void create() {
-        Users users = mockPerson();
+        Users user = mockPerson();
 
-        when(userRepo.save(users)).thenReturn(users);
-        userService.create(users);
+        when(userRepo.save(user)).thenReturn(user);
+        userService.create(user);
 
-        verify(userRepo, times(1)).save(users);
+        verify(userRepo, times(1)).save(user);
     }
 
     @Test
@@ -40,23 +41,10 @@ public class UsersServiceTest {
         verify(userRepo, times(1)).deleteById(1);
     }
 
-    @Test
-    public void getUserById() {
-        when(userRepo.findById(0)).thenReturn(Optional.of(subData().get(0)));
 
-        userService.getUserById(0);
-
-        verify(userRepo,times(1)).findById(0);
-    }
 
     @Test
-    public void getUserByNPTest() {
-        when(userRepo.findByName("steve")).thenReturn(subData().get(1));
-
-        userService.getUserByNP("steve");
-
-        verify(userRepo, times(1)).findByName("steve");
-
+    public void getUserByNP() {
     }
 
     private List<Users> subData() {
@@ -65,6 +53,7 @@ public class UsersServiceTest {
 
         return Arrays.asList(person1, person2);
     }
+
 
     private Users mockPerson() {
         return new Users("steve", "1234");

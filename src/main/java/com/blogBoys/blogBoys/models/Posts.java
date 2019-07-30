@@ -1,34 +1,46 @@
 package com.blogBoys.blogBoys.models;
 
-import org.hibernate.engine.internal.Cascade;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 public class Posts {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Integer post_id;
     String title;
     String content;
     String image;
     String date;
     String tag;
-    Integer user_id;
     String author;
+    String user_id;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @JsonManagedReference
+    private List<Comment> comments = new ArrayList<>();
+
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+////    @JsonManagedReference
+//    @JsonBackReference
+//    private Users users;
 
     public Posts() {
     }
 
-    public Posts(String title, String content, String image, String date, String tag, Integer user_id , String author) {
+    public Posts(String title, String content, String image, String date, String tag, String author) {
         this.title = title;
         this.content = content;
         this.image = image;
         this.date = date;
         this.tag = tag;
-        this.user_id = user_id;
         this.author = author;
     }
 
@@ -50,14 +62,6 @@ public class Posts {
 
     public String getContent() {
         return content;
-    }
-
-    public Integer getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
     }
 
     public void setContent(String content) {
@@ -103,5 +107,13 @@ public class Posts {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 }
