@@ -11,16 +11,19 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer commment_Id;
     String content;
+    String author;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id", nullable = false)
     @JsonBackReference
     private Posts posts;
 
     public Comment() {}
 
-    public Comment(String content, Posts posts) {
+    public Comment(String content, Posts posts, String author) {
         this.content = content;
         this.posts = posts;
+        this.author = author;
     }
 
     public Integer getCommment_Id() {
@@ -45,5 +48,13 @@ public class Comment {
 
     public void setPosts(Posts posts) {
         this.posts = posts;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }
